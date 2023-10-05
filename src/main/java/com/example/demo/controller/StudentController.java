@@ -18,7 +18,7 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     private StudentRepo studentRepo;
-    @GetMapping("/addStudent")
+    @GetMapping("/addStudent") //Реалезуем код для отображения форм
     public String addStudent(){
         return "addStudent";
     }
@@ -48,6 +48,7 @@ public class StudentController {
 
     @PostMapping("/editStudent")
     public String editStudent(
+            @RequestParam long id,
             @RequestParam String lastname,
             @RequestParam String name,
             @RequestParam String stream_group,
