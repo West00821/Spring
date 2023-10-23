@@ -9,10 +9,10 @@
 <body>
 <nav th:insert="components/header :: header" class="navbar navbar-expand-lg bg-body-tertiary"></nav>
 <div class="container mt-5">
-  <h3>Успеваемость студента</h3>
+  <h3>Успеваемость студента: </h3>
   <h4 th:text="${student.name}"></h4>
   <div class="row">
-    <div class="col-sm-6" th: th:each="discipline : ${disciplines}">
+    <div class="col-sm-6" th:each="discipline : ${disciplines}">
       <p th:text="${discipline.discipline}"></p>
     </div>
     <div class="col-sm-6"></div>
