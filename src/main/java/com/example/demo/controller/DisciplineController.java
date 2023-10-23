@@ -45,8 +45,15 @@ public class DisciplineController {
     }
 
     @PostMapping("/editDiscipline") //Сохраняем изменения в БД
-    public String editDiscipline(){
-        return null;
+    public String editDiscipline(
+            @RequestParam long id,
+            @RequestParam String discipline
+    ){
+        Optional<Discipline> discipline1 = disciplineRepo.findById(id);
+        Discipline discipline2 = discipline1.get();
+        discipline2.discipline = discipline;
+        disciplineRepo.save(discipline2);
+        return "redirect:/discipline";
     }
 
     @GetMapping("/deleteDiscipline/{id}") //Удалаяем дисциплины из БД

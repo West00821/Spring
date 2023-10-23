@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Discipline;
 import com.example.demo.models.Student;
+import com.example.demo.repo.DisciplineRepo;
 import com.example.demo.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,22 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     private StudentRepo studentRepo;
+    @Autowired
+    private DisciplineRepo disciplineRepo;
+    @GetMapping("/student/{id}")
+    public String showStudent(@PathVariable(value = "id") long id, Model model){
+        Optional<Student> student = studentRepo.findById(id);
+        model.addAttribute("student", student.get());
+        Iterable<Discipline> disciplines = disciplineRepo.findAll();
+        model.addAttribute("disciplines", disciplines);
+        return "student";
+    }
+
     @GetMapping("/addStudent") //Реалезуем код для отображения форм
     public String addStudent(){
         return "addStudent";
     }
+    
     @PostMapping("/addStudent")
     public String saveStudent(
             @RequestParam String lastname,
@@ -61,12 +75,12 @@ public class StudentController {
         student1.date = date;
         student1.stream_group = stream_group;
         studentRepo.save(student1);
-        return "redirect:/student";
+        return "redirect:/students";
     }
 
     @GetMapping("/deleteStudent/{id}")
     public String deleteStudent (@PathVariable(value = "id") long id){
         studentRepo.deleteById(id);
-        return "redirect:/student"; //Перенаправляем на страницу студент (redirect перенаправляет)
+        return "redirect:/students"; //Перенаправляем на страницу студент (redirect перенаправляет)
     }
 }
