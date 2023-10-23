@@ -8,11 +8,12 @@
 </head>
 <body>
 <nav th:insert="components/header :: header" class="navbar navbar-expand-lg bg-body-tertiary"></nav>
+
 <div class="container mt-5">
   <div class="col-md-7 mx-auto">
     <h7 class="text-center my-3">Для того, чтобы создать  дисциплину, заполните все поля и нажмите кнопку "Создать"</h7>
     <form action="/editDiscipline" method="post">
-      <input th: value="hidden" name="id" th:value="${discipline.id}">
+      <input type="hidden" name="id" th:value="${discipline.id}">
       <div class="mb-3 col-sm-8">
         <label class="form-label">Название</label>
         <input th:value="${discipline.discipline}" name="discipline" type="text"class="form-control" placeholder="Название дисциплины">
